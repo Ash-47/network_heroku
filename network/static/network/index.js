@@ -1,5 +1,5 @@
 function like(id){
-  fetch(`http://127.0.0.1:8000/like/${id}`)
+  fetch(`${window.location.host}/like/${id}`)
   .then(response=>response.json())
   .then(result=>{
     const ref=document.querySelector(`#anch${id}`);
