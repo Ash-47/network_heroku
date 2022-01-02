@@ -34,7 +34,7 @@ function edit(id){
   parent.appendChild(div);
   document.querySelector('#add-btn').addEventListener("click",(event)=>{
     event.preventDefault();
-    fetch(`http://127.0.0.1:8000/edit/${id}`,{
+    fetch(`${window.location.host}/edit/${id}`,{
     method: "POST",
     body: JSON.stringify({content: document.querySelector("#add-text").value})})
       .then(response=>response.json())
