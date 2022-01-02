@@ -1,5 +1,5 @@
 function like(id){
-  fetch(`${window.location.host}/like/${id}`)
+  fetch(`https://${window.location.hostname}/like/${id}`)
   .then(response=>response.json())
   .then(result=>{
     const ref=document.querySelector(`#anch${id}`);
@@ -34,7 +34,7 @@ function edit(id){
   parent.appendChild(div);
   document.querySelector('#add-btn').addEventListener("click",(event)=>{
     event.preventDefault();
-    fetch(`${window.location.host}/edit/${id}`,{
+    fetch(`https://${window.location.hostname}/edit/${id}`,{
     method: "POST",
     body: JSON.stringify({content: document.querySelector("#add-text").value})})
       .then(response=>response.json())

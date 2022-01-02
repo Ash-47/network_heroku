@@ -1,5 +1,5 @@
 function follow(id){
-  fetch(`${window.location.host}/follow/${id}`)
+  fetch(`https://${window.location.hostname}/follow/${id}`)
   .then(response=>response.json())
   .then(result=>{
     if (document.querySelector(`#follow-btn`).innerText=="Unfollow"){
