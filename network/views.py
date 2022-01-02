@@ -78,15 +78,14 @@ def manage_likes(request,id):
     getpost=Post.objects.get(pk=id)
     if request.user==getpost.post_creator.username:
         return JsonResponse({"likes":getpost.liked_by.all().count()})
-
-    if request.user in getpost.liked_by.all():
-        getpost.liked_by.remove(request.user)
-
     else:
-        getpost.liked_by.add(request.user)
+        if request.user in getpost.liked_by.all():
+            getpost.liked_by.remove(request.user)
 
-
-    return JsonResponse({"likes":getpost.liked_by.all().count()})
+        else:
+            getpost.liked_by.add(request.user)
+            
+            return JsonResponse({"likes":getpost.liked_by.all().count()})
 
 
 @login_required
