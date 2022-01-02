@@ -73,21 +73,23 @@ def register(request):
     else:
         return render(request, "network/register.html")
 
-@login_required(login_url="/login")
+@login_required
 def manage_likes(request,id):
     getpost=Post.objects.get(pk=id)
-    # if request.user.username==getpost.post_creator.user.username:
-    #     return JsonResponse({"likes":getpost.liked_by.all().count()})
+    if request.user.username == getpost.post_creator.username:
+        print("same user")
+        return JsonResponse({"likes":-1})
+
     if request.user in getpost.liked_by.all():
         getpost.liked_by.remove(request.user)
 
     else:
         getpost.liked_by.add(request.user)
 
-        return JsonResponse({"likes":getpost.liked_by.all().count()})
+    return JsonResponse({"likes":getpost.liked_by.all().count()})
 
 
-@login_required
+@login_required(login_url="login")
 def following(request):
     flwing=request.user.following.all()
     posts=Post.objects.none()

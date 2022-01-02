@@ -1,17 +1,16 @@
 function like(id){
-  fetch(`https://${window.location.hostname}/like/${id}`)
+  fetch(`${window.location.protocol}//${window.location.host}/like/${id}`)
   .then(response=>response.json())
   .then(result=>{
-    const ref=document.querySelector(`#anch${id}`);
-    if (ref.innerText=="Like"){
-      ref.innerHTML="Unlike";
-      console.log("changed like to unlike");
-    }
+
+    if (result.likes<0);
     else{
-        ref.innerHTML="Like";
-        console.log("changed unlike to like");
-    }
-    document.querySelector(`#pnum${id}`).innerHTML=result.likes;
+      const ref=document.querySelector(`#anch${id}`);
+      if (ref.innerText=="Like") ref.innerHTML="Unlike";
+      else ref.innerHTML="Like";
+
+      document.querySelector(`#pnum${id}`).innerHTML=result.likes;
+  }
   })
   .catch(error=>{
     alert("Login required");
@@ -34,7 +33,7 @@ function edit(id){
   parent.appendChild(div);
   document.querySelector('#add-btn').addEventListener("click",(event)=>{
     event.preventDefault();
-    fetch(`https://${window.location.hostname}/edit/${id}`,{
+    fetch(`${window.location.protocol}//${window.location.host}/edit/${id}`,{
     method: "POST",
     body: JSON.stringify({content: document.querySelector("#add-text").value})})
       .then(response=>response.json())

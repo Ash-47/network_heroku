@@ -10,7 +10,7 @@ class User(AbstractUser):
     followers=models.ManyToManyField("self",default='',related_name="follow",blank=True,symmetrical=False)
 
     def __str__(self):
-        return f"user: {self.username} following: {self.following} liked: {self.liked_post} followers: {self.followers}"
+        return f"user: {self.username} following: {self.following.count()} liked: {self.liked_post.count()} followers: {self.followers.count()}"
 
 class Post(models.Model):
     post_creator=models.ForeignKey(User,on_delete=models.CASCADE)
@@ -21,4 +21,4 @@ class Post(models.Model):
 
 
     def __str__(self):
-        return f"Post by: {self.post_creator}"
+        return f"Post by: {self.post_creator.username}"
