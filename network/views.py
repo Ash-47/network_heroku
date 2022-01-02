@@ -76,16 +76,15 @@ def register(request):
 @login_required(login_url="/login")
 def manage_likes(request,id):
     getpost=Post.objects.get(pk=id)
-    if request.user.username==getpost.post_creator.user.username:
-        return JsonResponse({"likes":getpost.liked_by.all().count()})
+    # if request.user.username==getpost.post_creator.user.username:
+    #     return JsonResponse({"likes":getpost.liked_by.all().count()})
+    if request.user in getpost.liked_by.all():
+        getpost.liked_by.remove(request.user)
+
     else:
-        if request.user in getpost.liked_by.all():
-            getpost.liked_by.remove(request.user)
+        getpost.liked_by.add(request.user)
 
-        else:
-            getpost.liked_by.add(request.user)
-
-            return JsonResponse({"likes":getpost.liked_by.all().count()})
+        return JsonResponse({"likes":getpost.liked_by.all().count()})
 
 
 @login_required
