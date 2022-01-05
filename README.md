@@ -1,4 +1,4 @@
-# network_heroku
+# Social Network
 
 A social network that allows users to make posts, follow other users, and “like” posts; uses Django for the backend, frontend served by HTML, CSS and JavaScript.
 
